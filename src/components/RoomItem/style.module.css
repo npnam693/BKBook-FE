@@ -1,0 +1,102 @@
+.wrapper {
+    width: 300px;
+    padding: 10px;
+    text-decoration: none;
+    color: #000000;
+
+    border-radius: 10px;
+    margin-bottom: var(--default-horizontal-spacer);
+}
+
+.wrapper:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.img{
+    width: 280px;
+    height: 252px;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.11);
+    border-radius: 10px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+.contentAction{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 34px;
+    margin-bottom: 5px;
+}
+.likeWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.rating{
+    display: flex;
+    align-items: center;
+}
+
+.location, .cost, .area {
+    display:flex;
+    align-items: center;
+    margin: 0px 0px 9px 3px;
+}
+.area{
+    margin-bottom: 0;
+}
+
+
+.likeBtn{
+    width: 78px;
+    height: 28px;
+    border: 1px solid #484848;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: #484848;
+    background-color: white;
+}
+
+.province{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0;
+    color: #767676;
+    padding: 0px 6px
+}
+
+.ratingPoint{
+    font-weight: 700;
+    font-size: 12px;
+    color: #484848;
+    padding-left: 4px;
+}
+.locationContent{
+    padding-left: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    /* identical to box height, or 150% */
+    color: #000000;
+    font-family: var(--font-Josefin);
+    color: var(--text-color)
+
+}
+
+.costContent,
+.areaContent{
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #060606;
+    font-family: var(--font-Josefin);
+    color: var(--text-color)
+
+}
