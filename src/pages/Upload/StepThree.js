@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 import { toast } from "react-toastify";
 import { ref, uploadBytes, getDownloadURL, uploadString } from "firebase/storage";
 import { storage } from "../../firebase";
-
+import {CircularProgress} from "@mui/material";
 const optionsFee = [2000, 5000, 10000, 20000];
 const StepThree = () => {
   const [feePublish, setFeePublish] = useState(2000);
@@ -73,6 +73,7 @@ const StepThree = () => {
         province: dataBook.step2.province,
         district: dataBook.step2.district,
         ward: dataBook.step2.ward,
+        phone: dataBook.step2.phone
       },
       config
     );
@@ -196,7 +197,7 @@ const StepThree = () => {
 
       <div className="w-5/12">
         <div className="h-[480px] bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
-          <p className="font-bold">Tiến hành thanh toán</p>
+          <p className="font-bold mb-3">Tiến hành thanh toán</p>
           <p>Quét mã QR hoặc nhấn nút bên dưới để đến trang thanh toán.</p>
           
             <div className="h-full flex items-center justify-center">
@@ -224,8 +225,9 @@ const StepThree = () => {
               <div >
                 <p>Nhấn "Xác nhận" để lấy thông tin thanh toán.</p>
               </div> : 
-              <div>
-                <p>Đang xử lý ...</p>
+              <div className="flex items-center justify-center flex-col gap-y-5">
+                <CircularProgress className="!border-primary" size={50}/>
+                <p>Đang xử lý, vui lòng chờ...</p>
               </div>
             }
           </div>

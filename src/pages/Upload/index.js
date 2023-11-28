@@ -7,8 +7,7 @@ import StepThree from './StepThree';
 const dataSteps = ["Nhập thông tin sách", "Nhập thông tin vận chuyển", "Thanh toán phí đăng tin"];
 
 function UploadPage() {
-  const { userInfo } = UserState();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   console.log(step)
   const getStep = () => {
     switch (step) {

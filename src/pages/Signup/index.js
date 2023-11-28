@@ -128,9 +128,9 @@ function SignUpPage({ children }) {
         avatar,
         phoneNumber,
         address,
-        province: province.split("//")[0],
-        district: district.split('//')[0],
-        ward: ward.split('//')[0],
+        province: province,
+        district: district,
+        ward: ward,
       });
 
       localStorage.setItem("userInfo", JSON.stringify(data));
