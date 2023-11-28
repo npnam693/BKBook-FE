@@ -3,16 +3,17 @@ import { UserState } from "./../../Context/UserProvider/index";
 import { useState } from "react";
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import StepThree from './StepThree';
 const dataSteps = ["Nhập thông tin sách", "Nhập thông tin vận chuyển", "Thanh toán phí đăng tin"];
 
 function UploadPage() {
-  const { userInfo } = UserState();
   const [step, setStep] = useState(0);
+  console.log(step)
   const getStep = () => {
     switch (step) {
       case 0: return <StepOne setStep={setStep} />;
       case 1: return <StepTwo setStep={setStep} />;
-      //case 2: return <StepThree setStep={setStep} />;
+      case 2: return <StepThree setStep={setStep} />;
       default: return <></>
     }
   }

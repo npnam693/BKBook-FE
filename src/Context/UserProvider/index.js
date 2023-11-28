@@ -6,7 +6,6 @@ const UserContext = createContext();
 const UserProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem("userInfo")))
     const [userFavourites, setUserFavourites] = useState([])
-    
 
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"))
