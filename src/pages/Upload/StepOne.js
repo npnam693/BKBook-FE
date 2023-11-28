@@ -17,6 +17,8 @@ const StepOne = ({setStep}) => {
     urlImgs: [],
   });
 
+
+
   const handleSelectFile = async (e) => {
     if (data.images.length > 10) {
       toast.warn("Chỉ có thể đăng tối đa 10 hình ảnh!")
@@ -30,7 +32,7 @@ const StepOne = ({setStep}) => {
         )
     );
     
-    setData({ ...data, urlImgs: [...data.urlImgs, ...urlImgs], images: [...data.images, ...e.target.files] });
+    setData({ ...data, images: e.target.files ,urlImgs: [...data.urlImgs, ...urlImgs]});
   };
 
   const getPromiseReader = (file) => {
@@ -45,16 +47,16 @@ const StepOne = ({setStep}) => {
   };
 
   const handleSubmit = () => {
-    // if (data.name === "" || data.author === "" || data.originalPrice === "" || data.price === "" || 
-    //   data.genre === "" || data.condition === "" || data.urlImgs.length === 0
-    // ) {
-    //   toast.warn("Vui lòng điền đủ các thông tin cần thiết")
-    //   return
-    // }
-    // else {
-      localStorage.setItem('newBook', JSON.stringify({step1: {...data, done: true}}))
+    if (data.name === "" || data.author === "" || data.originalPrice === "" || data.price === "" || 
+      data.genre === "" || data.condition === "" || data.urlImgs.length === 0
+    ) {
+      toast.warn("Vui lòng điền đủ các thông tin cần thiết")
+      return
+    }
+    else {
+      localStorage.setItem('newBook-step1', JSON.stringify( {...data, done: true}))
       setStep(step => step + 1)
-    // }
+    }
   }
 
   return (
@@ -109,10 +111,10 @@ const StepOne = ({setStep}) => {
             <span className="mb-2  text-[#333]">Tình trạng sách</span>
             <select
               className="bg-transparent text-black"
-              onChange={(e) => setData({ ...data, condition: e.target.value })}>
+              onChange={(e) => setData({ ...data, condition: Number(e.target.value) })}>
               <option value={0}>Chọn tình trang sách</option>
               {CONDITIONS.map((condition, index) => (
-                <option value={condition.name} key={index}>
+                <option value={index} key={index}>
                   {condition.name}
                 </option>
               ))}
