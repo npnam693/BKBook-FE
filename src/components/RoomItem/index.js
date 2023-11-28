@@ -1,120 +1,99 @@
-import styles from './style.module.css'
-import { Link } from 'react-router-dom';
-import { StarFill, GeoAlt, Cash, House} from 'react-bootstrap-icons';
-import Button from '@mui/material/Button';
+import styles from "./style.module.css";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
-import {memo} from 'react'
-import { useSnackbar } from 'notistack';
-import { UserState } from '../../Context/UserProvider';
-import axiosClient from '../../api/axiosClient.js';
+import { memo } from "react";
+import { useSnackbar } from "notistack";
+import { UserState } from "../../Context/UserProvider";
+import axiosClient from "../../api/axiosClient.js";
+
+
+const getColorType = (type) => {
+    if (type === 3) return "bg-red-500"
+    if (type === 2) return "bg-purple-400"
+    if (type === 1) return "bg-green-500"
+    if (type === 0) return "bg-green-700"
+}
+
 
 function RoomItem({ data }) {
-    const { userInfo, userFavourites, setUserFavourites } = UserState()
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { userInfo, userFavourites, setUserFavourites } = UserState();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    const toast = (message, variantType) => {
-        enqueueSnackbar(message, {
-            variant: variantType,
-            action: (key) => (
-                <Button style={{ fontSize: '12px', fontWeight: '600' }} size='small' onClick={() => closeSnackbar(key)}>
-                    Dismiss
-                </Button>
-            )
-        });
-    }
-    const config = userInfo ? {
+  const toast = (message, variantType) => {
+    enqueueSnackbar(message, {
+      variant: variantType,
+      action: (key) => (
+        <Button
+          style={{ fontSize: "12px", fontWeight: "600" }}
+          size="small"
+          onClick={() => closeSnackbar(key)}
+        >
+          Dismiss
+        </Button>
+      ),
+    });
+  };
+  const config = userInfo
+    ? {
         headers: {
-            Authorization: `Bearer ${userInfo.token}`
-        }
-    } : {}
-    const handleLikeClick = () => {
-        axiosClient.put('/api/rooms/favourites/add', {
-            roomId: data._id
-        }, config)
-            .then(response => {
-                setUserFavourites(response.data.favourites)
-                toast(response.data.message, 'success')
-            })
-            .catch(err => {
-                toast(err.response.data.message, 'error')
-            })
-    }
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    : {};
+  const handleLikeClick = () => {
+    axiosClient
+      .put(
+        "/api/rooms/favourites/add",
+        {
+          roomId: data._id,
+        },
+        config
+      )
+      .then((response) => {
+        setUserFavourites(response.data.favourites);
+        toast(response.data.message, "success");
+      })
+      .catch((err) => {
+        toast(err.response.data.message, "error");
+      });
+  };
 
-    const formatNameAddress = (name) =>{
-        if (name.substring(0, 9) === 'Thành phố') 
-            return name.substring(10)
-        if (name.substring(0, 4) === 'Tỉnh') 
-            return name.substring(5)
-        return name
-    }
+  const formatNameAddress = (name) => {
+    if (name.substring(0, 9) === "Thành phố") return name.substring(10);
+    if (name.substring(0, 4) === "Tỉnh") return name.substring(5);
+    return name;
+  };
 
-    return (
-        <Link to = {`/detail/${data._id}`} className = {styles.wrapper}>
-            <img className = {styles.img} src={data.image[0]}
-                alt="Avatar" 
-            />
-            <div className={styles.content}>
-                <div className = {styles.contentAction}>
-                    <div className = {styles.likeWrapper}>
-                        {userFavourites.some(userFavourite => userFavourite._id === data._id) ? (
-                        <Button
-                            variant="contained"
-                            color='success'
-                            sx={{
-                                display: 'inline',
-                                fontWeight: 'bold',
-                                mx: 0.5,
-                                fontSize: 14,
-                                padding: '1px 10px',
-                            }}
-                            onClick={(e) =>{
-                                e.preventDefault()
-                                handleLikeClick()
-                            }}
-                        >
-                            Đã yêu thích
-                        </Button>): 
-                        (<Button  
-                            variant = "outlined" 
-                            color = 'info'
-                            sx = {{
-                                display: 'inline',
-                                fontWeight: 'bold',
-                                mx: 0.5,
-                                fontSize: 14,
-                                padding: '1px 10px',
-                                minWidth: '117px'
-                            }}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                handleLikeClick()
-                            }}
-                        >
-                            Yêu thích
-                        </Button>)}
-                        <p className = {styles.province} > {formatNameAddress(data.province)} </p>
-                    </div>
-
-                    <div className = {styles.rating}> 
-                        <StarFill color="#00A699" size={10} style={{marginTop: -2}} />
-                        <p className={styles.ratingPoint}>{(data.ratingPoint != null) ? data.ratingPoint.$numberDecimal : 0  }</p>
-                    </div>
-                </div>
-                <div className = {styles.location}>
-                    <GeoAlt color="#000000" size={18}  style={{marginTop: -3}}/>
-                    <span className = {styles.locationContent}> {formatNameAddress(data.district)} </span>
-                </div>
-                <div className = {styles.cost}>
-                    <Cash color="#000000" size={18} style={{marginTop: -4}}/>
-                    <span className = {styles.costContent}>{data.price.toLocaleString('vi', {style : 'currency', currency : 'VND'})} /tháng </span>
-                </div>
-                <div className = {styles.area}>
-                    <House color="#000000" size={18} style={{marginTop: -4}}/>
-                    <span className = {styles.areaContent}>{data.area}m2</span>
-                </div>
+  return (
+    <Link to={`/detail/${data._id}`} className={styles.wrapper + ' relative group'}>
+      <img className={styles.img} src={data.image[0]} alt="Avatar"/>
+        <span className="bg-red-600 rounded-md shadow-xl px-2 py-1 font-bold text-yellow-300 text-sm absolute top-6 -left-2 z-10">-30%</span>
+        
+        <div className="absolute hidden group-hover:bg-[#cccc] group-hover:block w-[calc(100%-20px)] h-[230px] top-[10px] rounded-[10px]">
+            <div className="w-full h-full flex items-center justify-center flex-col">
+                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white !mb-1">Mua ngay</Button>
+                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white ">Xem chi tiết</Button>
             </div>
-        </Link>
-    );
+        </div>
+
+        <div className={styles.content }>
+            <div className="flex">
+                <span className="bg-blue-400 p-1 text-xs font-bold rounded-lg mr-2 text-[#333]">Giáo trình</span>
+                <span className={`p-1 text-xs text-white font-bold rounded-lg mr-1  ${getColorType(3)}`}>Loại 1</span>
+            </div>
+            
+            <div className="-mb-2 mt-1">
+                <p className="text-base font-bold capitalize">Giáo trình giải tích 1</p>
+                <p className="text-sm">{formatNameAddress(data.province)}, {formatNameAddress(data.district)}</p>
+                <p > 
+                    <span className="font-bold text-primary">{data.price.toLocaleString("vi", { style: "currency", currency: "VND"})}</span>
+                    <span className="line-through text-sm font-semibold ml-3">200.000đ</span>
+                </p>
+            </div>
+        </div>
+    </Link>
+  );
 }
 
 export default memo(RoomItem);

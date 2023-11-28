@@ -93,7 +93,7 @@ function LoginPage({children}) {
         
                 <div className = {styles.loginActionContainer}>
                     <div className = {styles.loginAction}>
-                        <Link to="/resetpassword" underline="none" color='#00A699'>Quên mật khẩu ?</Link>
+                        <Link to="/resetpassword" underline="none" color='#00A699' className='!text-base'>Quên mật khẩu ?</Link>
                         
                         <FormControlLabel 
                             control={<Checkbox defaultChecked color='bkmotel' sx={{ '& .MuiSvgIcon-root': { fontSize: 22 }}}/> } 
@@ -113,7 +113,7 @@ function LoginPage({children}) {
                 </div>
             <Divider variant="middle" theme = {theme}/>
 
-            <p style = {{fontSize:20, fontWeight: 500, marginBottom: 20, marginTop: 30}}>Bạn chưa có tài khoản ?</p>
+            <p style = {{fontSize:16, fontWeight: 500, marginBottom: 20, marginTop: 30}}>Bạn chưa có tài khoản ?</p>
             </ThemeProvider>
             <Button 
                 theme={theme1} 

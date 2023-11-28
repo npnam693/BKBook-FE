@@ -30,18 +30,13 @@ const userMenu = [
 ];
 const userActivedMenu = [
   {
-    icon: <Heart />,
-    title: "Danh sách quan tâm",
-    to: "/favourite",
-  },
-  {
     icon: <Cloud />,
-    title: "Bài đăng của tôi",
+    title: "Tin đăng của tôi",
     to: "/myupload",
   },
   {
     icon: <PencilSquare />,
-    title: "Đánh giá của tôi",
+    title: "Đơn hàng của tôi",
     to: "/review",
   },
   {
@@ -96,9 +91,8 @@ function AccountMenu() {
         </button>
       ) : (
         <button
-          className={styles.avatarOption}
+          className={styles.avatarOption + '   hover:bg-[#eee]'}
           onClick={handleClick}
-          onMouseOver={handleClick}
         >
           <List color="currentColor" size={18} />
           <PersonCircle color="#A1A1A1" size={24} />
@@ -109,8 +103,6 @@ function AccountMenu() {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
-        MenuListProps={{ onMouseLeave: handleClose }}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -159,7 +151,7 @@ function AccountMenu() {
               <MenuItem>
                 <div className={styles.menuItem}>
                   {item.icon}
-                  <p className={styles.menuTitle}>{item.title}</p>
+                  <p className="font-semibold ml-2 pb-[1px] !text-black">{item.title}</p>
                 </div>
               </MenuItem>
             </Link>

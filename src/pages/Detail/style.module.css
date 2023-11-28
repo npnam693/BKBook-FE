@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 .inner{
@@ -16,7 +17,7 @@
 .titleContent {
     font-family:  var(--font-family-detail);
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 4px;
     white-space: nowrap;
     text-overflow: ellipsis; 
@@ -123,7 +124,7 @@
     align-items: center;
 }
 .infoTitle {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
     margin-left:15px;
 }
@@ -173,7 +174,7 @@
 
 .descriptionRoom{
     font-family: var(--font-family-detail);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 25px;
     font-weight: 400;
     margin-top: 40px;
@@ -198,7 +199,6 @@
 .dateCreate{
     color: var(--primary-color);
     margin-left: 4px;
-    position: absolute;
 }
 
 .divider {
@@ -225,7 +225,7 @@
 .contactName{
     font-family: var(--font-family-detail);
     font-weight: 700;
-    font-size: 32px;
+    font-size: 24px;
     margin-bottom: 30px;
     color: var(--text-color)
 }

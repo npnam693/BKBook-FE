@@ -14,7 +14,7 @@ const theme1 = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: '20px',fontSize: '15px',fontFamily: '"Inter", sans-serif',
-                    fontWeight: 600,height: '50px',width: '400px',color: '#1488DB', marginBottom:'30px'
+                    fontWeight: 600,height: '40px',width: '400px',color: '#1488DB', marginBottom:'30px'
                 },
             }
         },
@@ -29,7 +29,7 @@ function Header() {
         <>
             <div className = {styles.container}></div>
             <header className = {styles.wrapper}>
-                <div className = {styles.inner}>
+                <div className = {styles.inner }>
                     <Link to = '/' className = {styles.logo}>
                         <span className = {styles.bklogo}>BK</span>
                         Motel
@@ -37,11 +37,10 @@ function Header() {
                     <Search />
                     <div className = {styles.action}>
                             {!userInfo ? 
-                                <Link  onClick={() => setModalOpen(true)} className = {styles.uploadBtn}>ĐĂNG BÀI</Link>
+                                <Link  onClick={() => setModalOpen(true)} className = {styles.uploadBtn}>ĐĂNG TIN</Link>
                                 :
-                                <Link  to='/upload' className = {styles.uploadBtn}>ĐĂNG BÀI</Link>
+                                <Link  to='/upload' className = {styles.uploadBtn}>Đăng Tin</Link>
                             }
-                            
                             <Menu/>        
                     </div>  
                     
@@ -52,7 +51,7 @@ function Header() {
                         aria-describedby="modal-modal-description"
                     >
                         <div className={styles.modalUpload}>
-                            <p className={styles.modalUploadContent}> Để đăng tải bài mới, hãy đăng nhập trước.</p>
+                            <p className={styles.modalUploadContent}> Để đăng tin bán mới, hãy đăng nhập trước.</p>
                             <Link to='/login' className = {styles.loginBtn} style={{marginRight:0}}>ĐĂNG NHẬP</Link>
                             
                             <p className={styles.modalUploadContent}> Bạn chưa có tài khoản ? </p>

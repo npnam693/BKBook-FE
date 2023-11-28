@@ -67,7 +67,7 @@ function Search() {
     }
         return (
         <div style={{display: "flex"}}>
-            <div className = {cx("wrapperSelect")}>
+            {/* <div className = {cx("wrapperSelect")}>
                 <select
                     className={cx("province")}
                     name="province"
@@ -131,7 +131,7 @@ function Search() {
                 </svg>
             </div>
                 
-            </div>
+            </div> */}
         </div>
     );
 }

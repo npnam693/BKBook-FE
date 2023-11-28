@@ -6,10 +6,10 @@ import Skeleton from '@mui/material/Skeleton';
 
 function SkeletonItem(props) {
   return (
-    <Card sx={{ maxWidth: 300, maxHeight: 395, marginBottom: '30px'}}>
+    <Card sx={{ maxWidth: 250, maxHeight: 377, marginBottom: '30px'}}>
         <CardHeader
         subheader={
-            <Skeleton sx={{ height: 252, width: 270 }} animation="wave" variant="rectangular" />}
+            <Skeleton sx={{ height: 252, width: 220 }} animation="wave" variant="rectangular" />}
         />
       {<CardContent>
           <React.Fragment>

@@ -45,6 +45,7 @@ function HomePage() {
             return Array(12+8*paging).fill(1).map((e1, i) => {
                 if (i < data.length) return <RoomItem key = {i} data={data[i]} />
                 else if (i >= data.length && !maxItem) return <SkeletonItem key={i} />
+                return <></>
             }
             )
         }
