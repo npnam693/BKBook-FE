@@ -38,7 +38,7 @@ function Header() {
         <div className={styles.inner}>
           <Link to="/" className={styles.logo}>
             <span className={styles.bklogo}>BK</span>
-            Motel
+            Book
           </Link>
           <Search />
           <div className={styles.action}>

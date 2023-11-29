@@ -8,7 +8,7 @@ function HeaderOnlyLogo() {
                 <div className = {styles.inner}>
                     <Link to = '/' className = {styles.logo}>
                         <span className = {styles.bklogo}>BK</span>
-                        Motel
+                        Book
                     </Link>
                 </div>
             </header>

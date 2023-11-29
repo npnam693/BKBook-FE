@@ -180,7 +180,7 @@ function SignUpPage({ children }) {
         <p style={{ fontSize: 16, color: "black", marginBottom: 15 }}>
           Chào mừng bạn đến với
           <span style={{ fontSize: 16, color: "#1488DB", fontWeight: 500 }}> BK</span>
-          <span style={{ fontSize: 16, color: "#00A699" }}>Motel</span>.
+          <span style={{ fontSize: 16, color: "#00A699" }}>Book</span>.
         </p>
 
         <p style={{ fontSize: 20, fontWeight: 500, marginBottom: 15 }}>Đăng ký tài khoản mới</p>
