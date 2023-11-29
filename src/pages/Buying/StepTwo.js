@@ -9,21 +9,34 @@ import { CircularProgress } from "@mui/material";
 import axiosClient from "../../api/axiosClient";
 import { UserState } from "../../Context/UserProvider";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const StepTwo = ({ setStep, orderData, setIdSelect }) => {
   const [isOnline, setIsOnline] = React.useState(true);
   const [payment, setPayment] = React.useState(false);
   const [uploading, setUploading] = React.useState(null);
   const [dataPayment, setDataPayment] = React.useState(null);
   const { userInfo } = UserState();
+  // const intervalRef = React.useRef(null)
+  // const timeoutRef = React.useRef(null)
+  // const navigate = useNavigate()
 
-  const paymentOrder = async () => {
-    setUploading(true);
-    setDataPayment({
-      payUrl: "data.payment.payUrl",
-      deepUrl: "data.payment.deeplink",
-    });
-    setUploading(false);
+  const getPayment = async () => {
+    axiosClient
+      .post("/api/orders/pay-order", orderData, config)
+      .then((payment) => {
+        setUploading(true);
+        setDataPayment({
+          payUrl: payment.data.payUrl,
+          deepUrl: payment.data.deeplink,
+        });
+        setUploading(false);
+      })
+      .catch((err) => {
+        toast.error("Thực hiện thanh toán không thành công.")
+      });
   };
+
 
   const moneyPay = async () => {
     axiosClient
@@ -94,7 +107,7 @@ const StepTwo = ({ setStep, orderData, setIdSelect }) => {
             Quay lại
           </Button>
           {isOnline ? (
-            <Button variant="contained" className="!bg-primary !font-semibold" onClick={() => setPayment(true)}>
+            <Button variant="contained" className="!bg-primary !font-semibold" onClick={() => {setPayment(true); getPayment()}}>
               Tiếp tục
             </Button>
           ) : (
@@ -108,11 +121,10 @@ const StepTwo = ({ setStep, orderData, setIdSelect }) => {
   else
     return (
       <div className="">
-        <div className="h-[400px] bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
+        <div className="h-[460px] bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
           <p className="font-bold mb-3">Tiến hành thanh toán</p>
           <p>Quét mã QR hoặc nhấn nút bên dưới để đến trang thanh toán.</p>
-
-          <div className="h-full flex items-center justify-center">
+          <div className="h-full flex items-center justify-center relative -top-7">
             {uploading === false ? (
               <div>
                 <div className="flex flex-col items-center">
@@ -134,11 +146,7 @@ const StepTwo = ({ setStep, orderData, setIdSelect }) => {
                   </Button>
                 </div>
               </div>
-            ) : uploading === null ? (
-              <div>
-                <p>Nhấn "Xác nhận" để lấy thông tin thanh toán.</p>
-              </div>
-            ) : (
+            ) :  (
               <div className="flex items-center justify-center flex-col gap-y-5">
                 <CircularProgress className="!border-primary" size={50} />
                 <p>Đang xử lý, vui lòng chờ...</p>

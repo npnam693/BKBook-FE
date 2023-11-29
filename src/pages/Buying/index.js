@@ -61,14 +61,14 @@ const Buying = ({ _id, setIdSelect }) => {
                 Giá sản phẩm: <span>{data?.price.toLocaleString("vi", { style: "currency", currency: "VND" })}</span>
               </p>
               <p className="mb-2 flex justify-between">
-                Phí vận chuyển: <span>19.000đ</span>{" "}
+                Phí vận chuyển: <span>24.000đ</span>{" "}
               </p>
             </div>
             <div className="w-10/12 mr-4 mt-3">
               <p className="mb-2 flex justify-between">
                 Tổng cộng:{" "}
                 <span className="font-bold text-blue-500">
-                  {(19000 + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}
+                  {(24000 + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}
                 </span>{" "}
               </p>
             </div>

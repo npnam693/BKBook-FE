@@ -5,3 +5,4 @@ export { default as SignUpPage } from "./Signup";
 export { default as UploadPage } from "./Upload";
 export { default as MyUploadPage } from "./MyUpload";
 export { default as MyBuy} from './MyBuy'
+export { default as MySell} from './MySell'
