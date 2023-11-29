@@ -16,14 +16,14 @@ const Buying = ({ _id, setIdSelect }) => {
   const [orderData, setOrderData] = React.useState({
     book: _id,
     buyer: userInfo._id,
-    deliveryFee: 19000,
+    deliveryFee: 24000,
     shippingName: "Giao Hàng Tiết Kiệm",
     shippingCode: "",
     address: userInfo.address,
     province: userInfo.province,
     district: userInfo.district,
     ward: userInfo.ward,
-    phone: userInfo.phone,
+    phone: userInfo.phoneNumber,
     name: userInfo.name,
   });
 
@@ -38,13 +38,15 @@ const Buying = ({ _id, setIdSelect }) => {
   const getStep = () => {
     switch (step) {
       case 0:
-        return <StepOne setStep={setStep} orderData={orderData} setOrderData={setOrderData} />;
-      case 1: return <StepTwo setStep={setStep} />;
+        return (
+          <StepOne setStep={setStep} orderData={orderData} setOrderData={setOrderData} setIdSelect={setIdSelect} />
+        );
+      case 1:
+        return <StepTwo setStep={setStep} orderData={orderData} setIdSelect={setIdSelect} />;
       default:
         return <></>;
     }
   };
-
 
   return (
     <Modal open={true} className="flex items-center justify-center ">
@@ -55,11 +57,20 @@ const Buying = ({ _id, setIdSelect }) => {
             {data && <RoomItem data={data} hiddenAction={true} />}
 
             <div className="w-10/12  border-b-[1px] border-solid border-[#ccc] mr-4">
-              <p className="flex justify-between">Giá sản phẩm: <span>{data?.price.toLocaleString("vi", { style: "currency", currency: "VND" })}</span></p>
-              <p className="mb-2 flex justify-between">Phí vận chuyển: <span>19.000đ</span> </p>
+              <p className="flex justify-between">
+                Giá sản phẩm: <span>{data?.price.toLocaleString("vi", { style: "currency", currency: "VND" })}</span>
+              </p>
+              <p className="mb-2 flex justify-between">
+                Phí vận chuyển: <span>19.000đ</span>{" "}
+              </p>
             </div>
             <div className="w-10/12 mr-4 mt-3">
-              <p className="mb-2 flex justify-between">Tổng cộng: <span className="font-bold text-blue-500">{(19000 + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}</span> </p>
+              <p className="mb-2 flex justify-between">
+                Tổng cộng:{" "}
+                <span className="font-bold text-blue-500">
+                  {(19000 + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}
+                </span>{" "}
+              </p>
             </div>
           </div>
 
@@ -82,7 +93,11 @@ const Buying = ({ _id, setIdSelect }) => {
             <div className="mt-5">{getStep()}</div>
           </section>
 
-          <div className="font-bold absolute right-4 top-4 text-xl hover:text-primary cursor-pointer" onClick={() => setIdSelect(null)}>X</div>
+          <div
+            className="font-bold absolute right-4 top-4 text-xl hover:text-primary cursor-pointer"
+            onClick={() => setIdSelect(null)}>
+            X
+          </div>
         </div>
       }
     </Modal>

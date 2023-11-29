@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UserState } from "../../Context/UserProvider";
 import { Button } from "@mui/material";
-const StepOne = ({ setStep, orderData, setOrderData }) => {
+const StepOne = ({ setStep, orderData, setOrderData, setIdSelect }) => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
@@ -30,15 +30,14 @@ const StepOne = ({ setStep, orderData, setOrderData }) => {
   }, [orderData.province, orderData.district, orderData.ward]);
 
   const handleSubmit = () => {
-    setStep(prv => prv + 1)
-  }
+    setStep((prv) => prv + 1);
+  };
 
   return (
     <div className="mt-5">
       <div className="flex flex-col-reverse group mb-5 ">
         <input
           placeholder="Nhập số điện thoại liên hệ "
-          id=""
           onChange={(e) => setOrderData({ ...orderData, phone: e.target.value })}
           defaultValue={orderData.phone}
         />
@@ -124,7 +123,7 @@ const StepOne = ({ setStep, orderData, setOrderData }) => {
       </div>
 
       <div className=" bg-slate-50 mt-5 rounded-2xl flex border-solid border-[1px] p-5 justify-center gap-x-10 w-full">
-        <Button variant="outlined" color="error" className="!font-semibold !w-32">
+        <Button variant="outlined" color="error" className="!font-semibold !w-32" onClick={() => setIdSelect(null)}>
           Huỷ bỏ
         </Button>
         <Button variant="contained" className="!bg-primary !font-semibold" onClick={handleSubmit}>

@@ -10,7 +10,7 @@ function HomePage() {
   const [paging, setPaging] = useState(0);
   const [loading, setLoading] = useState(true);
   const [maxItem, setMaxItem] = useState(false);
-  const [idSelect, setIdSelect] = useState("65659c280a6d604a2536c042");
+  const [idSelect, setIdSelect] = useState(null);
   console.log(maxItem);
   window.onscroll = function (ev) {
     if (maxItem) return;
@@ -45,8 +45,7 @@ function HomePage() {
       return Array(12 + 8 * paging)
         .fill(1)
         .map((e1, i) => {
-          if (i < data.length) return <RoomItem key={i} data={data[i]} />;
-          else if (i >= data.length && !maxItem) return <SkeletonItem key={i} />;
+          if (i < data.length) return <RoomItem key={i} data={data[i]} setIdSelect={setIdSelect}/>;
           return <></>;
         });
     }
@@ -55,7 +54,7 @@ function HomePage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inner}>
-        <div className={styles.itemList}>{renderItem()}{renderItem()}{renderItem()}</div>
+        <div className={styles.itemList}>{renderItem()}</div>
       </div>
       {idSelect !== null && <Buying _id={idSelect} setIdSelect={setIdSelect}/>}
     </div>

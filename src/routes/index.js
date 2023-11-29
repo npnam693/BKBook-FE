@@ -3,11 +3,11 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import {
   HomePage,
   DetailPage,
-  FavouritePage,
   LoginPage,
   SignUpPage,
   UploadPage,
   MyUploadPage,
+  MyBuy
 } from "../pages";
 
 const publicRoutes = [
@@ -18,9 +18,11 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-  { path: "/favourite", component: FavouritePage, layout: DefaultLayout },
   { path: "/upload", component: UploadPage, layout: DefaultLayout },
-  { path: "/myupload", component: MyUploadPage, layout: DefaultLayout },
+  { path: "/my-books", component: MyUploadPage, layout: DefaultLayout },
+  { path: "/my-buys", component: MyBuy, layout: DefaultLayout },
+  { path: "/my-sells", component: MyUploadPage, layout: DefaultLayout },
 ];
 
 export { publicRoutes, privateRoutes };
+

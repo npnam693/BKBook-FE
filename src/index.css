@@ -65,6 +65,10 @@ span, p {
   line-height: 1.4rem;
 }
 
+p {
+  margin-bottom: 5px;
+}
+
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
   width: 26px;

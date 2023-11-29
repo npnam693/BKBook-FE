@@ -56,7 +56,7 @@ const StepTwo = ({ setStep }) => {
       data.phone === "" ||
       data.name === ""
     ) {
-      toast.warn("Vui lòng điền đầy đủ các thông tin cần thiết")
+      toast.warn("Vui lòng điền đầy đủ các thông tin cần thiết");
     } else {
       console.log(data);
       localStorage.setItem(
@@ -149,7 +149,10 @@ const StepTwo = ({ setStep }) => {
           </div>
 
           <div className="flex flex-col-reverse group mb-5 basis-1/2">
-            <input placeholder="Nhập họ và tên " id="" onChange={(e) => setData({ ...data, name: e.target.value })} 
+            <input
+              placeholder="Nhập họ và tên "
+              id=""
+              onChange={(e) => setData({ ...data, name: e.target.value })}
               defaultValue={data.name}
             />
             <span className="mb-2 ml-2 text-[#333]">Họ và tên</span>
@@ -158,33 +161,40 @@ const StepTwo = ({ setStep }) => {
 
         <div className="grid grid-cols-3 gap-x-4 justify-between content-between w-full">
           <select id="province" name="province" onChange={(e) => setData({ ...data, province: e.target.value })}>
-            <option key={"0"} value={data.province} >
-              {data.province  && data.province === userInfo.province ? data.province.split('//')[0] : '--Chọn Tỉnh/Thành phố--'}
+            <option key={"0"} value={data.province}>
+              {data.province && data.province === userInfo.province
+                ? data.province.split("//")[0]
+                : "--Chọn Tỉnh/Thành phố--"}
             </option>
-            {provinces.map((e) => String(e.code) !== data.province.split('//')[1] &&(
-              <option key={e.code} value={String(e.name) + "//" + e.code}>
-                {e.name}
-              </option>
-            ))}
+            {provinces.map(
+              (e) =>
+                String(e.code) !== data.province.split("//")[1] && (
+                  <option key={e.code} value={String(e.name) + "//" + e.code}>
+                    {e.name}
+                  </option>
+                )
+            )}
           </select>
 
           <select id="district" name="district" onChange={(e) => setData({ ...data, district: e.target.value })}>
-            <option value={data.district} >
-              {data.district  && data.district === userInfo.district ? data.district.split('//')[0] : "--Chọn Quận/Huyện--"}
+            <option value={data.district}>
+              {data.district && data.district === userInfo.district
+                ? data.district.split("//")[0]
+                : "--Chọn Quận/Huyện--"}
             </option>
-            {districts.map((e) => 
-              String(e.code) !== data.district.split('//')[1] &&
-              (
-                <option key={e.code} value={String(e.name) + "//" + e.code}>
-                  {e.name}
-                </option>
-              )
+            {districts.map(
+              (e) =>
+                String(e.code) !== data.district.split("//")[1] && (
+                  <option key={e.code} value={String(e.name) + "//" + e.code}>
+                    {e.name}
+                  </option>
+                )
             )}
           </select>
 
           <select id="ward" name="ward" onChange={(e) => setData({ ...data, ward: e.target.value })}>
             <option value={data.ward} defaulvalue={data.ward}>
-            {data.ward && data.ward === userInfo.ward ? data.ward.split('//')[0] : '--Chọn Xã/Phường--'}
+              {data.ward && data.ward === userInfo.ward ? data.ward.split("//")[0] : "--Chọn Xã/Phường--"}
             </option>
             {wards.map((e) => (
               <option key={e.code} value={String(e.name) + "//" + e.code}>
@@ -216,6 +226,19 @@ const StepTwo = ({ setStep }) => {
         </div>
         <div className=" bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
           <p>Hướng dẫn:</p>
+          <p>
+            Để nhận tiền sau khi đơn hàng được bán thành công trên hệ thống của chúng tôi qua ví điện tử Momo, bạn cần
+            cung cấp số tài khoản Momo của mình cho chúng tôi.
+          </p>
+          <p>
+            Lưu ý rằng việc cập nhật thông tin số tài khoản Momo là rất quan trọng để chúng tôi có thể chuyển khoản tiền
+            cho bạn sau khi đơn hàng được bán thành công. Hãy đảm bảo rằng thông tin bạn cung cấp là chính xác và hoàn
+            toàn phù hợp để tránh trục trặc trong quá trình thanh toán.
+          </p>
+
+          <p>
+            Để đảm bảo shipper có thể lấy đơn hàng của bạn sau khi bán thành công, bạn cũng cần cung cấp thông tin địa chỉ và thông tin liên lạc chính xác.
+          </p>
         </div>
       </div>
     </>
