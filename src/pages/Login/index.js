@@ -9,26 +9,15 @@ import styles from './style.module.css'
 import { createTheme, ThemeProvider  } from '@mui/material/styles';
 import {FormControlLabel, Checkbox, Divider, TextField, Button, Link} from '@mui/material'
 import {UserState} from '../../Context/UserProvider'
+import { toast } from 'react-toastify';
 
 function LoginPage({children}) {
     const { userInfo, setUserInfo , setUserFavourites} = UserState();
     let navigate = useNavigate();
-    
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-    const toast = (message, variantType) => {
-        enqueueSnackbar(message, {
-            variant: variantType,
-            action: (key) => (
-                <Button style={{fontSize: '12px', fontWeight: '600'}} size='small' onClick={() => closeSnackbar(key)}>
-                    Dismiss
-                </Button>
-            )
-        });
-    };
 
     const handleSubmit = async ({email, password}) => {
         if (!email || !password) {
-            toast('Bạn phải điền đầy đủ các thông tin cần thiết.', 'warning')
+            toast.warning('Bạn phải điền đầy đủ các thông tin cần thiết.')
             return
         }
         try {
@@ -36,17 +25,18 @@ function LoginPage({children}) {
                 "/api/users/login",
                 { email, password },
             );
-            localStorage.setItem("userInfo", JSON.stringify(data));
+            console.log(data)
+            localStorage.setItem("userInfo", JSON.stringify({...data.user, token: data.token}));
             const user = JSON.parse(localStorage.getItem("userInfo"))
             setUserInfo(user)
             setUserFavourites(user.favourites)
-            toast('Đăng nhập thành công.', 'success')
+            toast.success('Đăng nhập thành công.')
             navigate('/')
         }  catch (error) {    
             if (error.response.status === 500) 
-                toast('Không kết nối được đến server.', 'error')
+                toast.error('Không kết nối được đến server.')
             else 
-                toast('Email hoặc mật khẩu không hợp lệ.', 'error')    
+                toast.error('Email hoặc mật khẩu không hợp lệ.')    
         }
     };
 

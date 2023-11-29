@@ -7,7 +7,8 @@ import {
   SignUpPage,
   UploadPage,
   MyUploadPage,
-  MyBuy
+  MyBuy,
+  MySell
 } from "../pages";
 
 const publicRoutes = [
@@ -21,7 +22,7 @@ const privateRoutes = [
   { path: "/upload", component: UploadPage, layout: DefaultLayout },
   { path: "/my-books", component: MyUploadPage, layout: DefaultLayout },
   { path: "/my-buys", component: MyBuy, layout: DefaultLayout },
-  { path: "/my-sells", component: MyUploadPage, layout: DefaultLayout },
+  { path: "/my-sells", component: MySell, layout: DefaultLayout },
 ];
 
 export { publicRoutes, privateRoutes };

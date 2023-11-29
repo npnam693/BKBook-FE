@@ -107,7 +107,7 @@ const StepThree = () => {
           clearTimeout(timeoutRef.current)
         })
       }, [5000])
-    }, [5000])
+    }, [8000])
   };
 
   return (
@@ -228,14 +228,14 @@ const StepThree = () => {
             {
               uploading === false ?
               <div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center relative -top-7">
                   <QRCode
                     id="qrcode"
                     value={dataPayment.payUrl}
                     size={290}
                     level={"H"}
                     includeMargin={true}
-                    className="border-[1px] border-solid boder-[#111] mb-5"
+                    className="border-[1px] border-solid boder-[#111] mb-5 "
                   />
                   <Button variant="contained" className="!bg-primary" 
                     onClick={() => {window.open(dataPayment.payUrl,'_blank')}}
