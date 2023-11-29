@@ -1,30 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600,700,800,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600,700,800,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --font-family: 'Nunito Sans', sans-serif;
-    --primary-color: #00A699;
-    --black: #000;
-    --text-color: #333;
-    
-    --default-layout-header-height: 80px;
-    --default-layout-footer-height: 50px;
-    --default-horizontal-spacer: 30px;
+  --font-family: "Nunito Sans", sans-serif;
+  --primary-color: #00a699;
+  --black: #000;
+  --text-color: #333;
 
+  --default-layout-header-height: 80px;
+  --default-layout-footer-height: 50px;
+  --default-horizontal-spacer: 30px;
 
-    --button-border-radius: 20px;
-    --default-layout-width: 72%;
+  --button-border-radius: 20px;
+  --default-layout-width: 80%;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 1200px) {
@@ -45,20 +44,18 @@
   }
 }
 
-
-
-
 body {
-    font-family: var(--font-family);
-    font-size: 1rem;
-    line-height: 1.5;
-    text-rendering: optimizespeed;
-    color: var(--text-color);
-    overflow-y: overlay !important;
-    padding-right: 0 !important;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-rendering: optimizespeed;
+  color: var(--text-color);
+  overflow-y: overlay !important;
+  padding-right: 0 !important;
 }
 
-span, p {
+span,
+p {
   font-size: 1rem;
   font-weight: 400;
   color: #000;
@@ -77,7 +74,7 @@ p {
   border: 10px solid transparent;
 }
 
-*::-webkit-scrollbar-thumb {        
+*::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 0 10px;
 }
 
@@ -113,7 +110,10 @@ input:focus-visible ~ span {
 }
 
 @keyframes animationCircle {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-

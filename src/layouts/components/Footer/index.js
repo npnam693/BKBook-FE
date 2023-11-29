@@ -7,7 +7,7 @@ function Footer() {
             <footer className = {styles.wrapper}>
                 <div className = {styles.inner}>
                     <div className = {styles.action}>
-                        <p className = {styles.license}>@2022 BKMotel</p>
+                        <p className = {styles.license}>@2023 BKBook</p>
                         <a href = '/' className = {styles.licenseContent}>Quy chế sử dụng</a>
                         <a href = '/' className = {styles.licenseContent}>Chính sách bảo mật</a>
                         <a href = '/' className = {styles.licenseContent}>Liên hệ</a>
