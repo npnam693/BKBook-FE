@@ -30,14 +30,19 @@ const userMenu = [
 ];
 const userActivedMenu = [
   {
-    icon: <Cloud />,
+    icon: <></>,
     title: "Tin đăng của tôi",
-    to: "/myupload",
+    to: "/my-books",
   },
   {
-    icon: <PencilSquare />,
-    title: "Đơn hàng của tôi",
-    to: "/review",
+    icon: <></>,
+    title: "Đơn bán của tôi",
+    to: "/my-sells",
+  },
+  {
+    icon: <></>,
+    title: "Đơn mua của tôi",
+    to: "/my-buys",
   },
   {
     icon: <BoxArrowLeft size={24} style={{ margin: "-4px 2px 0px -4px" }} />,
