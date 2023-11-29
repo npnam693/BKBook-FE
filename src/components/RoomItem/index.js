@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 import { memo } from "react";
-import { useSnackbar } from "notistack";
 import { UserState } from "../../Context/UserProvider";
-import axiosClient from "../../api/axiosClient.js";
 import { GENRES_COLORS } from "../../const/book.js";
+import { toast } from "react-toastify";
 
 
 const getColorType = (type) => {
@@ -17,9 +16,8 @@ const getColorType = (type) => {
 }
 
 
-function RoomItem({ data, hiddenAction }) {
+function RoomItem({ data, hiddenAction, setIdSelect }) {
   const { userInfo} = UserState();
-
 
   const config = userInfo
     ? {
@@ -36,6 +34,16 @@ function RoomItem({ data, hiddenAction }) {
     return name;
   };
 
+  const handleClickBuy = (e) => {
+    e.preventDefault();
+    console.log(userInfo)
+    if (!userInfo) {
+      toast.error("Bạn phải đăng nhập mới có thể mua hàng.")
+      return
+    }
+    setIdSelect(data._id)
+  }
+
   return (
     <Link to={`/detail/${data._id}`} className={styles.wrapper + ' relative group'} onClick={(e) => hiddenAction && e.preventDefault()}>
       <img className={styles.img} src={data.image[0]} alt="Avatar"/>
@@ -44,8 +52,8 @@ function RoomItem({ data, hiddenAction }) {
         !hiddenAction && 
         <div className="absolute hidden group-hover:bg-[#cccc] group-hover:block w-[calc(100%-20px)] h-[230px] top-[10px] rounded-[10px]">
             <div className="w-full h-full flex items-center justify-center flex-col">
-                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white !mb-1">Mua ngay</Button>
-                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white ">Xem chi tiết</Button>
+                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white !mb-1 hover:!opacity-60" onClick={handleClickBuy}>Mua ngay</Button>
+                <Button className="!bg-primary !capitalize !px-4 !py-1 !font-semibold text-sm !text-white  hover:!opacity-60">Xem chi tiết</Button>
             </div>
         </div>
         }

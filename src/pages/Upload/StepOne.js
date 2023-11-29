@@ -3,7 +3,7 @@ import { CONDITIONS, GENRES } from "../../const/book";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 
-const StepOne = ({setStep}) => {
+const StepOne = ({ setStep }) => {
   const inputRef = useRef();
 
   const [data, setData] = useState({
@@ -18,22 +18,20 @@ const StepOne = ({setStep}) => {
     urlImgs: [],
   });
 
-
-
   const handleSelectFile = async (e) => {
     if (data.images.length > 10) {
-      toast.warn("Chỉ có thể đăng tối đa 10 hình ảnh!")
-      return
+      toast.warn("Chỉ có thể đăng tối đa 10 hình ảnh!");
+      return;
     }
     const urlImgs = await Promise.all(
       Array(e.target.files.length)
         .fill(0)
         .map(async (_, index) => {
-         return await getPromiseReader(e.target.files[index])}
-        )
+          return await getPromiseReader(e.target.files[index]);
+        })
     );
-    
-    setData({ ...data, images: e.target.files ,urlImgs: [...data.urlImgs, ...urlImgs]});
+
+    setData({ ...data, images: e.target.files, urlImgs: [...data.urlImgs, ...urlImgs] });
   };
 
   const getPromiseReader = (file) => {
@@ -48,17 +46,22 @@ const StepOne = ({setStep}) => {
   };
 
   const handleSubmit = () => {
-    if (data.name === "" || data.author === "" || data.originalPrice === "" || data.price === "" || 
-      data.genre === "" || data.condition === "" || data.urlImgs.length === 0
+    if (
+      data.name === "" ||
+      data.author === "" ||
+      data.originalPrice === "" ||
+      data.price === "" ||
+      data.genre === "" ||
+      data.condition === "" ||
+      data.urlImgs.length === 0
     ) {
-      toast.warn("Vui lòng điền đủ các thông tin cần thiết")
-      return
+      toast.warn("Vui lòng điền đủ các thông tin cần thiết");
+      return;
+    } else {
+      localStorage.setItem("newBook-step1", JSON.stringify({ ...data, done: true }));
+      setStep((step) => step + 1);
     }
-    else {
-      localStorage.setItem('newBook-step1', JSON.stringify( {...data, done: true}))
-      setStep(step => step + 1)
-    }
-  }
+  };
 
   return (
     <>
@@ -82,18 +85,21 @@ const StepOne = ({setStep}) => {
               placeholder="Giá sách gốc"
               id=""
               type="number"
+              step={1000}
               onChange={(e) => setData({ ...data, originalPrice: e.target.value })}
             />
-            <span className=" mb-2 ml-2 text-[#333]">Giá gốc</span>
+            <span className=" mb-2 ml-2 text-[#333]">Giá gốc: <b>{Number(data.originalPrice).toLocaleString('vi', {style: "currency", currency: "VND"})}</b></span>
           </div>
           <div className="flex flex-col-reverse basis-1/2 mb-5">
             <input
               placeholder="Giá bán sách"
               id=""
               type="number"
+              step={1000}
+              maxLength={12}
               onChange={(e) => setData({ ...data, price: e.target.value })}
             />
-            <span className=" mb-2 ml-2 text-[#333]">Giá bán</span>
+            <span className=" mb-2 ml-2 text-[#333]">Giá bán: <b>{Number(data.price).toLocaleString('vi', {style: "currency", currency: "VND"})}</b></span>
           </div>
         </div>
         <div className="flex gap-x-5 mb-5">
@@ -136,7 +142,13 @@ const StepOne = ({setStep}) => {
 
           <div className="flex flex-wrap gap-x-5 gap-y-5">
             {data.urlImgs.map((image, index) => (
-              <img src={image} width={32*4} height={32*4} alt="anhdep"  className="object-cover w-32 h-32 border-[1px] text-4xl border-solid border-[#ccc]"/>
+              <img
+                src={image}
+                width={32 * 4}
+                height={32 * 4}
+                alt="anhdep"
+                className="object-cover w-32 h-32 border-[1px] text-4xl border-solid border-[#ccc]"
+              />
             ))}
             <div className="w-32 h-32 border-[1px] text-4xl border-solid border-[#ccc] font-bold flex items-center justify-center cursor-pointer hover:bg-[#bbb]">
               +
@@ -145,13 +157,30 @@ const StepOne = ({setStep}) => {
         </div>
       </div>
       <div className="w-5/12 h-full">
-        <div className=" bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
-          <p>Hướng dẫn:</p>
+        <div className=" bg-slate-50 mt-5 rounded-2xl flex border-solid border-[1px] p-5 justify-evenly w-full">
+          <Button variant="outlined" color="error" className="!font-semibold !w-32">
+            Quay lại
+          </Button>
+          <Button variant="contained" className="!bg-primary !font-semibold" onClick={handleSubmit}>
+            Hoàn thành
+          </Button>
         </div>
 
-        <div className=" bg-slate-50 mt-5 rounded-2xl flex border-solid border-[1px] p-5 justify-evenly w-full">
-          <Button variant="outlined" color="error" className="!font-semibold !w-32">Quay lại</Button>
-          <Button variant="contained" className="!bg-primary !font-semibold" onClick={handleSubmit}>Hoàn thành</Button>
+        <div className=" bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
+          <p>Hướng dẫn:</p>
+            <p><span className="font-bold">Hình Ảnh: </span>
+            
+            
+            
+            Bạn có thể tải lên tối thiểu 3 và tối đa 10 hình ảnh của cuốn sách.Bạn chụp hình ảnh từ nhiều góc độ khác nhau, đặc biệt là các bản in,trang bìa, trang nội dung, và những phần quan trọng khác để xác thực tình trạng thực tế của cuốn sách.</p>
+            <p><span className="font-bold">Tình Trạng Sách Cũ: </span>Mô tả tình trạng sách của bạn bằng cách chọn một trong các mức độ sau:</p>
+            <ul className="ml-5">
+              <li><span className="font-semibold">Loại 1 - 100% (Mới): </span>Sách không có bất kỳ vết nứt, gãy, hoặc bất kỳ hư hại nào, giống như mới.</li>
+              <p><span className="font-semibold">Loại 2 (75%): </span>Sách có một số dấu hiệu sử dụng nhẹ nhàng, nhưng vẫn còn rất mới.</p>
+              <p><span className="font-semibold">Loại 3 (50%): </span>Sách đã được sử dụng đủ để có một số vết trầy xước hoặc gãy nhẹ.</p>
+              <p><span className="font-semibold">Loại 4 (25%): </span>Sách đã qua sử dụng một cách đáng kể, có nhiều vết trầy xước, gãy hoặc mất trang, nhưng vẫn đọc được.</p>
+            </ul>
+            <p>Đừng quên cung cấp thông tin chi tiết và chân thực để giúp người mua đưa ra quyết định chính xác về việc mua sách của bạn. Chúc bạn bán sách thành công!</p>
         </div>
       </div>
 

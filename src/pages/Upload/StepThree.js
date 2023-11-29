@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { ref, uploadBytes, getDownloadURL, uploadString } from "firebase/storage";
 import { storage } from "../../firebase";
 import {CircularProgress} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const optionsFee = [2000, 5000, 10000, 20000];
 const StepThree = () => {
   const [feePublish, setFeePublish] = useState(2000);
@@ -15,7 +16,9 @@ const StepThree = () => {
   const { userInfo } = UserState();
   const [uploading, setUploading] = useState(null);
   const [dataPayment, setDataPayment] = useState(null);
-
+  const intervalRef = React.useRef(null)
+  const timeoutRef = React.useRef(null)
+  const navigate = useNavigate()
   const getRate = (isAll) => {
     const base = isAll ? 75000 : 55000;
     const result = base / feePublish;
@@ -37,6 +40,10 @@ const StepThree = () => {
       step2: JSON.parse(localStorage.getItem("newBook-step2")),
     };
     setDataBook(data);
+    return () => {
+      intervalRef.current && clearInterval(intervalRef.current);
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+    }
   }, []);
 
   const uploadFile = async (imageUpload) => {
@@ -70,20 +77,37 @@ const StepThree = () => {
         condition: 1,
         publishFee: feePublish,
         address: dataBook.step2.address,
-        province: dataBook.step2.province,
-        district: dataBook.step2.district,
-        ward: dataBook.step2.ward,
+        province: dataBook.step2.province.split('//')[1],
+        district: dataBook.step2.district.split('//')[1],
+        ward: dataBook.step2.ward.split('//')[1],
         phone: dataBook.step2.phone
       },
       config
     );
-    
-  
     setDataPayment({
       payUrl: data.payment.payUrl,
-      deepUrl: data.payment.deeplink
+      deepUrl: data.payment.deeplink,
+      id: data.book._id
     })
+
     setUploading(false)
+    timeoutRef.current = setTimeout(() => {
+      intervalRef.current = setInterval(async () => {
+        axiosClient.get(`/api/books/${data.book._id}`).then(book => {
+          if (book.data.isSelling) {
+            alert("Thanh toán thành công, sách của bạn đã được đăng bán.")
+            navigate('/')
+            clearInterval(intervalRef.current)
+            clearTimeout(timeoutRef.current)
+          }
+        }).catch(err => {
+          alert("Thanh toán không thành công. Tin đăng của bạn đã bị huỷ.")   
+          navigate('/')
+          clearInterval(intervalRef.current)
+          clearTimeout(timeoutRef.current)
+        })
+      }, [5000])
+    }, [5000])
   };
 
   return (
@@ -136,7 +160,7 @@ const StepThree = () => {
             </p>
           </div>
           <div className="flex justify-end">
-            <Button variant="contained" className="!bg-primary !mt-4 !ml-auto" onClick={handleConfirm}>
+            <Button variant="contained" className="!bg-primary !mt-4 !ml-auto" onClick={handleConfirm} disabled={uploading === false}>
               Xác nhận
             </Button>
           </div>

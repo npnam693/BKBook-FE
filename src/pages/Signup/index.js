@@ -48,7 +48,6 @@ function SignUpPage({ children }) {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-
   let navigate = useNavigate();
   const [isUpload, setUpload] = useState(false);
   const [values, setValues] = useState({
@@ -83,6 +82,7 @@ function SignUpPage({ children }) {
     if (provinces.length === 0) getProvinces();
     if (values.province) getDistricts();
     if (values.district) getWards();
+
   }, [values.province, values.district, values.ward]);
 
   function uploadFile(imageUpload, progessRef) {
@@ -105,7 +105,6 @@ function SignUpPage({ children }) {
   }
 
   const handleSubmit = async (values) => {
-    console.log(values);
 
     for (const key in values) {
       if (values[key] === "") {

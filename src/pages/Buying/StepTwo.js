@@ -5,22 +5,43 @@ import Banking from "../../assets/imgs/banking.png";
 import VisaIcon from "../../assets/imgs/visa.png";
 import { Button } from "@mui/material";
 import QRCode from "qrcode.react";
-import {CircularProgress} from "@mui/material";
-const StepTwo = () => {
+import { CircularProgress } from "@mui/material";
+import axiosClient from "../../api/axiosClient";
+import { UserState } from "../../Context/UserProvider";
+import { toast } from "react-toastify";
+const StepTwo = ({ setStep, orderData, setIdSelect }) => {
   const [isOnline, setIsOnline] = React.useState(true);
   const [payment, setPayment] = React.useState(false);
-  const [uploading, setUploading] = React.useState(null)
-  const [dataPayment, setDataPayment] = React.useState(null)
+  const [uploading, setUploading] = React.useState(null);
+  const [dataPayment, setDataPayment] = React.useState(null);
+  const { userInfo } = UserState();
 
-  const paymentOrder =   async () => {
-    setUploading(true)
+  const paymentOrder = async () => {
+    setUploading(true);
     setDataPayment({
       payUrl: "data.payment.payUrl",
-      deepUrl: "data.payment.deeplink"
-    })
-    setUploading(false)
+      deepUrl: "data.payment.deeplink",
+    });
+    setUploading(false);
   };
 
+  const moneyPay = async () => {
+    axiosClient
+      .post("/api/orders/create-order", orderData, config)
+      .then(() => {
+        toast.success("Bạn đã đặt đơn hàng thành công.");
+      })
+      .catch(() => {
+        toast.error("Bạn đã đặt đơn không thành công.");
+      })
+      .then(() => setIdSelect(null));
+  };
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  };
 
   if (!payment)
     return (
@@ -65,58 +86,68 @@ const StepTwo = () => {
         </div>
 
         <div className="flex w-full justify-center mt-10">
+          <Button
+            variant="outlined"
+            color="error"
+            className="!font-semibold !w-32 !mr-10"
+            onClick={() => setStep((prv) => prv - 1)}>
+            Quay lại
+          </Button>
           {isOnline ? (
             <Button variant="contained" className="!bg-primary !font-semibold" onClick={() => setPayment(true)}>
               Tiếp tục
             </Button>
           ) : (
-            <Button variant="contained" className="!bg-primary !font-semibold">
+            <Button variant="contained" className="!bg-primary !font-semibold" onClick={moneyPay}>
               Hoàn tất đơn hàng
             </Button>
           )}
         </div>
       </div>
     );
-  else return (
-    <div className="">
-    <div className="h-[400px] bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
-      <p className="font-bold mb-3">Tiến hành thanh toán</p>
-      <p>Quét mã QR hoặc nhấn nút bên dưới để đến trang thanh toán.</p>
-      
-        <div className="h-full flex items-center justify-center">
-        {
-          uploading === false ?
-          <div>
-            <div className="flex flex-col items-center">
-              <QRCode
-                id="qrcode"
-                value={dataPayment.payUrl}
-                size={290}
-                level={"H"}
-                includeMargin={true}
-                className="border-[1px] border-solid boder-[#111] mb-5"
-              />
-              <Button variant="contained" className="!bg-primary" 
-                onClick={() => {window.open(dataPayment.payUrl,'_blank')}}
-              >
-                ĐẾN TRANG THANH TOÁN
-              </Button>
-            </div>
+  else
+    return (
+      <div className="">
+        <div className="h-[400px] bg-slate-50 mt-5 rounded-2xl border-solid border-[1px] p-5">
+          <p className="font-bold mb-3">Tiến hành thanh toán</p>
+          <p>Quét mã QR hoặc nhấn nút bên dưới để đến trang thanh toán.</p>
+
+          <div className="h-full flex items-center justify-center">
+            {uploading === false ? (
+              <div>
+                <div className="flex flex-col items-center">
+                  <QRCode
+                    id="qrcode"
+                    value={dataPayment.payUrl}
+                    size={290}
+                    level={"H"}
+                    includeMargin={true}
+                    className="border-[1px] border-solid boder-[#111] mb-5"
+                  />
+                  <Button
+                    variant="contained"
+                    className="!bg-primary"
+                    onClick={() => {
+                      window.open(dataPayment.payUrl, "_blank");
+                    }}>
+                    ĐẾN TRANG THANH TOÁN
+                  </Button>
+                </div>
+              </div>
+            ) : uploading === null ? (
+              <div>
+                <p>Nhấn "Xác nhận" để lấy thông tin thanh toán.</p>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-col gap-y-5">
+                <CircularProgress className="!border-primary" size={50} />
+                <p>Đang xử lý, vui lòng chờ...</p>
+              </div>
+            )}
           </div>
-           :
-          uploading === null ? 
-          <div >
-            <p>Nhấn "Xác nhận" để lấy thông tin thanh toán.</p>
-          </div> : 
-          <div className="flex items-center justify-center flex-col gap-y-5">
-            <CircularProgress className="!border-primary" size={50}/>
-            <p>Đang xử lý, vui lòng chờ...</p>
-          </div>
-        }
+        </div>
       </div>
-    </div>
-  </div>
-  )
+    );
 };
 
 export default StepTwo;
