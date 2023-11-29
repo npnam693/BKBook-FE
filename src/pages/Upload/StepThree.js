@@ -77,9 +77,9 @@ const StepThree = () => {
         condition: 1,
         publishFee: feePublish,
         address: dataBook.step2.address,
-        province: dataBook.step2.province.split('//')[1],
-        district: dataBook.step2.district.split('//')[1],
-        ward: dataBook.step2.ward.split('//')[1],
+        province: dataBook.step2.province,
+        district: dataBook.step2.district,
+        ward: dataBook.step2.ward,
         phone: dataBook.step2.phone
       },
       config

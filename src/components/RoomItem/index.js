@@ -68,10 +68,12 @@ function RoomItem({ data, hiddenAction, setIdSelect }) {
                 <span className={`p-1 text-xs text-white font-bold rounded-lg mr-1  ${getColorType(3)}`}>Loại {data.condition + 1}</span>
             </div>
             
-            <div className="-mb-2 mt-1">
-                <p className="text-base font-bold capitalize">{data.name}</p>
-                <p className="text-sm">{formatNameAddress(data.province)}, {formatNameAddress(data.district)}</p>
-                <p > 
+            <div className="-mb-2 mt-1 flex flex-col justify-between h-full">
+                <div>
+                  <p className="text-base font-bold capitalize min-h-[48px]">{data.name}</p>
+                  <p className="text-sm">{data.province.split('//')[0]}, {(data.district.split('//')[0])}</p>
+                </div>
+                <p className="mt-auto"> 
                     <span className="font-bold text-primary">{data.price.toLocaleString("vi", { style: "currency", currency: "VND"})}</span>
                     <span className="line-through text-sm font-semibold ml-3">{data.originalPrice.toLocaleString("vi", { style: "currency", currency: "VND"})}</span>
                 </p>
