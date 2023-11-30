@@ -17,6 +17,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { useSnackbar } from "notistack";
 
 import { Rating, ImageList, ImageListItem, Button } from "@mui/material";
+import { toast } from "react-toastify";
 
 function DetailPage() {
   const url = window.location.pathname;
@@ -25,7 +26,6 @@ function DetailPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
   const { userInfo, userFavourites, setUserFavourites } = UserState();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [reload, setReload] = useState(true);
   const [curNumReview, setCurNumReview] = useState(1);
   const [review, setReview] = useState({
@@ -34,20 +34,7 @@ function DetailPage() {
     roomId: id,
   });
 
-  const toast = (message, variantType) => {
-    enqueueSnackbar(message, {
-      variant: variantType,
-      action: (key) => (
-        <Button
-          style={{ fontSize: "12px", fontWeight: "600" }}
-          size="small"
-          onClick={() => closeSnackbar(key)}
-        >
-          Dismiss
-        </Button>
-      ),
-    });
-  };
+  
 
   const config = userInfo
     ? {
@@ -68,10 +55,10 @@ function DetailPage() {
       )
       .then((response) => {
         setUserFavourites(response.data.favourites);
-        toast(response.data.message, "success");
+        toast.success(response.data.message);
       })
       .catch((err) => {
-        toast(err.response.data.message, "error");
+        toast.error(err.response.data.message);
       });
   };
 

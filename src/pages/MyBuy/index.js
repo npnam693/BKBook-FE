@@ -82,8 +82,8 @@ const MyBuy = () => {
                 </td>
                 <td>{getStatus[order.status]}</td>
                 <td>
-                  <p>Giao hàng tiết kiệm</p>
-                  <p>MVĐ: VN8123DX13123</p>
+                  <p>{order.shippingName}</p>
+                  <p>MVĐ: {order.shippingCode}</p>
                   <p>{Number(order.deliveryFee).toLocaleString("vi", { style: "currency", currency: "VND" })}</p>
                 </td>
                 <td>

@@ -12,7 +12,7 @@ import { UserState } from "../../Context/UserProvider";
 import { toast } from "react-toastify";
 
 function LoginPage({ children }) {
-  const { userInfo, setUserInfo, setUserFavourites } = UserState();
+  const { userInfo, setUserInfo } = UserState();
   let navigate = useNavigate();
 
   const handleSubmit = async ({ email, password }) => {
@@ -26,7 +26,6 @@ function LoginPage({ children }) {
       localStorage.setItem("userInfo", JSON.stringify({ ...data.user, token: data.token }));
       const user = JSON.parse(localStorage.getItem("userInfo"));
       setUserInfo(user);
-      setUserFavourites(user.favourites);
       toast.success("Đăng nhập thành công.");
       navigate("/");
     } catch (error) {
