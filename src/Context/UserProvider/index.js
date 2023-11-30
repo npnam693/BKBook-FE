@@ -5,7 +5,6 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem("userInfo")))
-    const [userFavourites, setUserFavourites] = useState([])
 
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"))
@@ -17,12 +16,6 @@ const UserProvider = ({ children }) => {
               Authorization: `Bearer ${user.token}`
           }
         }
-        axiosClient.get(`/api/rooms/favourites/${user._id}`, config)
-          .then(res => {
-              // console.log(res)
-              setUserFavourites(res.data)
-          })
-          .catch(err => {console.log(err)})
       }
     }, [])
 
@@ -33,8 +26,6 @@ const UserProvider = ({ children }) => {
         value={{
             userInfo,
             setUserInfo,
-            userFavourites, 
-            setUserFavourites,
         }}
       >
         {children}

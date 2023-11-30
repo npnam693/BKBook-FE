@@ -15,6 +15,7 @@ import {
 } from "react-bootstrap-icons";
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const userMenu = [
   {
@@ -56,7 +57,7 @@ const userActivedMenu = [
 ];
 
 function AccountMenu() {
-  const { userInfo, setUserInfo, setUserFavourites } = UserState();
+  const { userInfo, setUserInfo } = UserState();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -67,22 +68,7 @@ function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const toast = (message, variantType) => {
-    enqueueSnackbar(message, {
-      variant: variantType,
-      action: (key) => (
-        <Button
-          style={{ fontSize: "12px", fontWeight: "600" }}
-          size="small"
-          onClick={() => closeSnackbar(key)}
-        >
-          Dismiss
-        </Button>
-      ),
-    });
-  };
-
+ 
   return (
     <>
       {userInfo ? (
@@ -143,9 +129,8 @@ function AccountMenu() {
               onClick={() => {
                 if (item.action) {
                   setUserInfo(null);
-                  setUserFavourites([]);
                   item.action();
-                  toast("Đăng xuất thành công.", "success");
+                  toast.success("Đăng xuất thành công.", "success");
                 }
               }}
               key={index}

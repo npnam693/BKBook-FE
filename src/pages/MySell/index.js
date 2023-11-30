@@ -96,8 +96,8 @@ const MySell = () => {
                 </td>
                 <td>{getStatus[order.status]}</td>
                 <td>
-                  <p>Giao hàng tiết kiệm</p>
-                  <p>MVĐ: VN8123DX13123</p>
+                  <p>{order.shippingName}</p>
+                  <p>MVĐ: {order.shippingCode}</p>
                   <p>{Number(order.deliveryFee).toLocaleString("vi", { style: "currency", currency: "VND" })}</p>
                 </td>
                 <td>
@@ -107,11 +107,16 @@ const MySell = () => {
                 </td>
                 <td>
                   {order.status === "preparing" ? (
-                    <Button className="!bg-primary !font-bold" variant="contained" onClick={() => finalizePrepare(order._id)}>
+                    <Button
+                      className="!bg-primary !font-bold"
+                      variant="contained"
+                      onClick={() => finalizePrepare(order._id)}>
                       Chuẩn bị hoàn tất
                     </Button>
                   ) : (
-                    <Link className="text-primary font-bold underline" to={`/detail/${order._id}`}>Thông tin chi tiết</Link>
+                    <Link className="text-primary font-bold underline" to={`/detail/${order._id}`}>
+                      Thông tin chi tiết
+                    </Link>
                   )}
                 </td>
               </tr>

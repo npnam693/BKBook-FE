@@ -1,4 +1,4 @@
-import axiosClient from "../../api/axiosClient.js";
+import axiosClient, { bkBookApi } from "../../api/axiosClient.js";
 import { useState, Fragment, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,17 +7,7 @@ import Footer from "../../layouts/components/Footer";
 import styles from "./style.module.css";
 import { UserState } from "../../Context/UserProvider";
 
-import {
-  Divider,
-  TextField,
-  Button,
-  CircularProgress,
-  createTheme,
-  ThemeProvider,
-  Select,
-  MenuItem,
-  InputLabel,
-} from "@mui/material";
+import { Divider, TextField, Button, CircularProgress, createTheme, ThemeProvider } from "@mui/material";
 import { useSnackbar } from "notistack";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -65,24 +55,22 @@ function SignUpPage({ children }) {
 
   useEffect(() => {
     const getProvinces = async () => {
-      const res = await fetch("https://provinces.open-api.vn/api/p/");
-      const resJson = await res.json();
-      setProvinces(await resJson);
+      const res = await bkBookApi.getProvinces();
+      setProvinces(res.data.data);
     };
     const getDistricts = async () => {
-      let res = await fetch(`https://provinces.open-api.vn/api/p/${values.province.split("//")[1]}?depth=2`);
-      let resArray = await res.json();
-      setDistricts(await resArray.districts);
+      const res = await bkBookApi.getDistricts(values.province.split("//")[1]);
+      setDistricts(res.data.data);
     };
+
     const getWards = async () => {
-      const res = await fetch(`https://provinces.open-api.vn/api/d/${values.district.split("//")[1]}?depth=2`);
-      let resArray = await res.json();
-      setWards(await resArray.wards);
+      const res = await bkBookApi.getWards(values.district.split("//")[1]);
+      setWards(res.data.data);
     };
+
     if (provinces.length === 0) getProvinces();
     if (values.province) getDistricts();
     if (values.district) getWards();
-
   }, [values.province, values.district, values.ward]);
 
   function uploadFile(imageUpload, progessRef) {
@@ -105,7 +93,6 @@ function SignUpPage({ children }) {
   }
 
   const handleSubmit = async (values) => {
-
     for (const key in values) {
       if (values[key] === "") {
         showSnackbar("lackInfo");
@@ -119,6 +106,7 @@ function SignUpPage({ children }) {
     }
 
     const { email, password, name, avatar, phoneNumber, address, province, district, ward } = values;
+
     try {
       const { data } = await axiosClient.post("/api/users", {
         email,
@@ -245,35 +233,50 @@ function SignUpPage({ children }) {
           <p className="!text-left w-full font-semibold !text-[#333] mb-4">Địa chỉ liên hệ</p>
 
           <div className="grid grid-cols-3 gap-x-4 justify-between content-between w-full">
-            <select id="province" name="province" onChange={(e) => setValues({ ...values, province: e.target.value })}>
-              <option key={"0"} value="0" defaulvalue={0}>
+            <select
+              id="province"
+              name="province"
+              onChange={(e) => {
+                setWards([]);
+                setValues({ ...values, province: e.target.value, district: "", ward: "" });
+              }}
+              value={values.province}>
+              <option key={""} value="">
                 --Chọn Tỉnh/Thành phố--
               </option>
-              {provinces.map((e) => (
-                <option key={e.code} value={String(e.name) + "//" + e.code}>
-                  {e.name}
+              {provinces.map((item) => (
+                <option key={item.ProvinceID} value={item.NameExtension[0] + "//" + item.ProvinceID}>
+                  {item.NameExtension[0]}
                 </option>
               ))}
             </select>
 
-            <select id="district" name="district" onChange={(e) => setValues({ ...values, district: e.target.value })}>
-              <option value="0" defaulvalue={0}>
+            <select
+              id="district"
+              name="district"
+              onChange={(e) => setValues({ ...values, district: e.target.value, ward: "" })}
+              value={values.district}>
+              <option key={""} value="">
                 --Chọn Quận/Huyện--
               </option>
-              {districts.map((e) => (
-                <option key={e.code} value={String(e.name) + "//" + e.code}>
-                  {e.name}
+              {districts.map((item) => (
+                <option key={item.DistrictID} value={item.NameExtension[0] + "//" + item.DistrictID}>
+                  {item.NameExtension[0]}
                 </option>
               ))}
             </select>
 
-            <select id="ward" name="ward" onChange={(e) => setValues({ ...values, ward: e.target.value })}>
-              <option value="0" defaulvalue={0}>
+            <select
+              id="ward"
+              name="ward"
+              onChange={(e) => setValues({ ...values, ward: e.target.value })}
+              value={values.ward}>
+              <option key={""} value="">
                 --Chọn Xã/Phường--
               </option>
-              {wards.map((e) => (
-                <option key={e.code} value={String(e.name) + "//" + e.code}>
-                  {e.name}
+              {wards.map((item) => (
+                <option key={item.WardCode} value={item.NameExtension[0] + "//" + item.WardCode}>
+                  {item.NameExtension[0]}
                 </option>
               ))}
             </select>

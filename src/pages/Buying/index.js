@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "@mui/material";
-import axiosClient from "../../api/axiosClient";
+import axiosClient, { bkBookApi } from "../../api/axiosClient";
 import RoomItem from "../../components/RoomItem";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
@@ -17,7 +17,7 @@ const Buying = ({ _id, setIdSelect }) => {
     book: _id,
     buyer: userInfo._id,
     deliveryFee: 24000,
-    shippingName: "Giao Hàng Tiết Kiệm",
+    shippingName: "Giao Hàng Nhanh",
     shippingCode: "",
     address: userInfo.address,
     province: userInfo.province,
@@ -29,11 +29,31 @@ const Buying = ({ _id, setIdSelect }) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axiosClient.get(`/api/books/${_id}`);
-      setData(data);
+      const bookData = (await axiosClient.get(`/api/books/${_id}`));
+      setData(bookData.data);
     };
     fetchData();
   }, []);
+
+
+  
+  React.useEffect(() => {
+    const fetchData = async () => {
+      if (!data) return;
+      console.log(data)
+      const feeData = await bkBookApi.countShippingFee(
+        data.district.split('//')[1],
+        data.ward.split('//')[1],
+        orderData.district.split('//')[1],
+        orderData.ward.split('//')[1],
+      )
+      setOrderData({...orderData, deliveryFee: feeData.data.data.total})
+    };
+    fetchData();
+  }, [data, orderData.district, orderData.ward]);
+
+
+
 
   const getStep = () => {
     switch (step) {
@@ -61,14 +81,14 @@ const Buying = ({ _id, setIdSelect }) => {
                 Giá sản phẩm: <span>{data?.price.toLocaleString("vi", { style: "currency", currency: "VND" })}</span>
               </p>
               <p className="mb-2 flex justify-between">
-                Phí vận chuyển: <span>24.000đ</span>{" "}
+                Phí vận chuyển: <span>{orderData?.deliveryFee.toLocaleString("vi", { style: "currency", currency: "VND" })}</span>{" "}
               </p>
             </div>
             <div className="w-10/12 mr-4 mt-3">
               <p className="mb-2 flex justify-between">
                 Tổng cộng:{" "}
                 <span className="font-bold text-blue-500">
-                  {(24000 + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}
+                  {(orderData?.deliveryFee + data?.price).toLocaleString("vi", { style: "currency", currency: "VND" })}
                 </span>{" "}
               </p>
             </div>
