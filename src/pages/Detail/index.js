@@ -64,7 +64,7 @@ function DetailPage() {
       );
     } else if (data.image.length === 2) {
       return (
-        <ImageList sx={{ width: "100%", height: 640 }} cols={2}  gap={20} className="!border-[1px] !border-solid !border-[#ccc]">
+        <ImageList sx={{ width: "100%", height: 640 }} cols={2}  gap={20} >
           {data.image.map((item) => (
             <ImageListItem key={item}>
               <img src={item} alt={"itemle"} loading="lazy" style={{ borderRadius: 15, objectFit: "cover" }} />
@@ -197,8 +197,8 @@ function DetailPage() {
           </div>
           {renderImg()}
 
-          <div className={styles.infoContainer}>
-            <div className={styles.infoRoom}>
+          <div className={styles.infoContainer + " !flex !w-full flex-row"}>
+            <div className={styles.infoRoom  + " min-w-[unset] !w-9/12"}>
               <div className={styles.infoTitleWrapper}>
                 <House color="#000000" size={30} />
                 <p className={styles.infoTitle}>Thông tin sách</p>
@@ -239,7 +239,7 @@ function DetailPage() {
               </div>
             </div>
 
-            <div className={styles.infoContact + " !min-w-[500px] !h-full !flex !items-center !justify-center !flex-col gap-y-5"}>
+            <div className={styles.infoContact + " !basis-3/12 !h-full !flex !items-center !justify-center !flex-col gap-y-5"}>
               <div className={styles.costContainer + " !justify-end"}>
                 <div>
                   <p></p>
