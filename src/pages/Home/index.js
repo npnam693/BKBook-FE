@@ -8,16 +8,18 @@ import Buying from "../Buying/index.js";
 function HomePage() {
   const [data, setData] = useState([]);
   const [paging, setPaging] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(null);
   const [maxItem, setMaxItem] = useState(false);
   const [idSelect, setIdSelect] = useState(null);
-  console.log(maxItem);
   window.onscroll = function (ev) {
     if (maxItem) return;
     else {
       if (window.innerHeight + window.scrollY + 30 >= document.body.scrollHeight) {
-        setPaging(paging + 1);
-        setLoading(true);
+        console.log('alo')
+        if (loading === false) {
+          setPaging(paging + 1);
+          setLoading(true);
+        }
       }
     }
   };
@@ -31,7 +33,7 @@ function HomePage() {
         if (data.length === res.data.length) {
           setMaxItem(true);
         } else setData(res.data);
-        setLoading(false);
+          setLoading(false);
       })
       .catch((err) => console.error(err));
   }, [paging]);
