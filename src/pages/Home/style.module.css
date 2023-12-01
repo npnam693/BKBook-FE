@@ -13,8 +13,25 @@
     display: flex;
     flex-direction: row;
     flex-wrap : wrap;
-    justify-content: space-between;
 }
 .social-container{
     background-color: red;
 }
+
+@media screen and (min-width: 1200px) {
+    .itemList {
+        column-gap: 4.5px
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .itemList {
+        column-gap: 2.5px
+    }
+  }
+  
+  @media screen and (min-width: 1920px) {
+    .itemList {
+        column-gap: 12.5px
+    }
+  }
