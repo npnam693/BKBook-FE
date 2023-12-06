@@ -260,6 +260,7 @@ function SignUpPage({ children }) {
                 --Chọn Quận/Huyện--
               </option>
               {districts.map((item) => (
+                item.NameExtension &&
                 <option key={item.DistrictID} value={item.NameExtension[0] + "//" + item.DistrictID}>
                   {item.NameExtension[0]}
                 </option>
@@ -275,6 +276,7 @@ function SignUpPage({ children }) {
                 --Chọn Xã/Phường--
               </option>
               {wards.map((item) => (
+                item.NameExtension &&
                 <option key={item.WardCode} value={item.NameExtension[0] + "//" + item.WardCode}>
                   {item.NameExtension[0]}
                 </option>
