@@ -172,6 +172,7 @@ const StepTwo = ({ setStep }) => {
               --Chọn Tỉnh/Thành phố--
             </option>
             {provinces.map((item) => (
+              item.NameExtension &&
               <option key={item.ProvinceID} value={item.NameExtension[0] + "//" + item.ProvinceID}>
                 {item.NameExtension[0]}
               </option>
@@ -186,6 +187,7 @@ const StepTwo = ({ setStep }) => {
               --Chọn Quận/Huyện--
             </option>
             {districts.map((item) => (
+              item.NameExtension &&
               <option key={item.DistrictID} value={item.NameExtension[0] + "//" + item.DistrictID}>
                 {item.NameExtension[0]}
               </option>
@@ -197,6 +199,7 @@ const StepTwo = ({ setStep }) => {
               --Chọn Xã/Phường--
             </option>
             {wards.map((item) => (
+              item.NameExtension &&
               <option key={item.WardCode} value={item.NameExtension[0] + "//" + item.WardCode}>
                 {item.NameExtension[0]}
               </option>
