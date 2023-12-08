@@ -98,12 +98,12 @@ const MySell = () => {
                 <td>
                   <p>{order.shippingName}</p>
                   <p>MVĐ: {order.shippingCode}</p>
-                  <p>{Number(order.deliveryFee).toLocaleString("vi", { style: "currency", currency: "VND" })}</p>
+                  <p>Phí vận chuyển: <b>{Number(order.deliveryFee).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
                 </td>
                 <td>
                   <p>Momo</p>
                   <p>SDT: {order.book.phone}</p>
-                  <p>SDT: {order.book.phone}</p>
+                  <p>Tiền nhận về: <b>{Number(order.book.price).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
                 </td>
                 <td>
                   {order.status === "preparing" ? (

@@ -118,22 +118,6 @@ const StepTwo = ({ setStep }) => {
           </div>
         </div>
 
-        <div className="flex gap-x-5 justify-end">
-          <Button variant="contained" className="h-full !bg-primary ">
-            Xác thực OTP
-          </Button>
-
-          <div className="flex flex-row-reverse mb-5 items-end">
-            <input
-              placeholder="Nhập mã xác nhận"
-              id=""
-              minLength={6}
-              maxLength={6}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
-            />
-            <span className="mb-2 ml-2 text-[#333] mr-5">Mã xác nhận:</span>
-          </div>
-        </div>
 
         <p className="font-bold mb-5 mt-5">Thông tin vận chuyển</p>
 
