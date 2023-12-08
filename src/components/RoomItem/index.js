@@ -51,7 +51,7 @@ function RoomItem({ data, hiddenAction, setIdSelect }) {
   return (
     <Link to={`/detail/${data._id}`} className={styles.wrapper + ' relative group'} onClick={(e) => hiddenAction && e.preventDefault()}>
       <img className={styles.img} src={data.image[0]} alt="Avatar"/>
-        <span className="bg-red-600 rounded-md shadow-xl px-2 py-1 font-bold text-yellow-300 text-sm absolute top-6 -left-2 z-10">-{100 - data.price / data.originalPrice * 100}%</span>
+        <span className="bg-red-600 rounded-md shadow-xl px-2 py-1 font-bold text-yellow-300 text-sm absolute top-6 -left-2 z-10">-{(100 - data.price / data.originalPrice * 100).toFixed(2)}%</span>
         {
         !hiddenAction && 
         <div className="absolute hidden group-hover:bg-[#cccc] group-hover:block w-[calc(100%-20px)] h-[230px] top-[10px] rounded-[10px]">

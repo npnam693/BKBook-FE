@@ -5,6 +5,7 @@ import axiosClient from "../../api/axiosClient.js";
 import { UserState } from "../../Context/UserProvider";
 import Skeleton from "@mui/material/Skeleton";
 import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
 import { ImageList, ImageListItem } from "@mui/material";
 import { GENRES_COLORS } from "../../const/book.js";
@@ -247,7 +248,7 @@ function DetailPage() {
 
                 <p className="!flex !flex-col relative">
                   <span className="bg-red-600 rounded-md shadow-xl px-2 py-1 font-bold text-yellow-300 text-sm absolute top-6 -left-2 z-10">
-                    -{100 - data.price/data.originalPrice*100}%
+                    -{(100 - data.price / data.originalPrice * 100).toFixed(2)}%
                   </span>
 
                   <span className="text-right font-bold text-primary text-3xl">
@@ -258,8 +259,17 @@ function DetailPage() {
                   </span>
                 </p>
               </div>
-              <Button className="!bg-primary !font-bold !px-[60px] !py-[10px]" variant="contained" onClick={() => setIdSelect(data._id)}>
-                Mua ngay
+              <Button className="!bg-primary !font-bold !px-[60px] !py-[10px]" variant="contained" onClick={() => {
+                  if (!userInfo) {
+                    toast.error("Bạn phải đăng nhập mới có thể mua hàng.")
+                    return
+                  }
+                  if (data.seller === userInfo._id) {
+                    toast.error("Đây là sách bạn đăng bán.")
+                    return
+                  }
+                  setIdSelect(data._id)}}>
+                  Mua ngay
               </Button>
             </div>
           </div>
