@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { CONDITIONS, GENRES } from "../../const/book";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const StepOne = ({ setStep }) => {
   const inputRef = useRef();
-
+  const navigate = useNavigate()
   const [data, setData] = useState({
     name: "",
     author: "",
@@ -158,7 +159,7 @@ const StepOne = ({ setStep }) => {
       </div>
       <div className="w-5/12 h-full">
         <div className=" bg-slate-50 mt-5 rounded-2xl flex border-solid border-[1px] p-5 justify-evenly w-full">
-          <Button variant="outlined" color="error" className="!font-semibold !w-32">
+          <Button variant="outlined" color="error" className="!font-semibold !w-32" onClick={() => navigate('/')}>
             Quay lại
           </Button>
           <Button variant="contained" className="!bg-primary !font-semibold" onClick={handleSubmit}>

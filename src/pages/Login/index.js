@@ -57,7 +57,7 @@ function LoginPage({ children }) {
             name="email"
             label="Nhập Email / Tên đăng nhập"
             fullWidth
-            color="bkmotel"
+            color="bkbook"
             onChange={(e) => {
               setValues({ ...values, [e.target.name]: e.target.value });
             }}
@@ -68,7 +68,7 @@ function LoginPage({ children }) {
             type="password"
             variant="outlined"
             fullWidth
-            color="bkmotel"
+            color="bkbook"
             onChange={(e) => {
               setValues({ ...values, [e.target.name]: e.target.value });
             }}
@@ -81,7 +81,7 @@ function LoginPage({ children }) {
               </Link>
 
               <FormControlLabel
-                control={<Checkbox defaultChecked color="bkmotel" sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />}
+                control={<Checkbox defaultChecked color="bkbook" sx={{ "& .MuiSvgIcon-root": { fontSize: 22 } }} />}
                 label="Nhớ tài khoản"
               />
             </div>
@@ -90,7 +90,7 @@ function LoginPage({ children }) {
               type="submit"
               variant="contained"
               size="large"
-              color="bkmotel"
+              color="bkbook"
               onClick={(e) => {
                 handleSubmit(values);
               }}>
@@ -174,7 +174,7 @@ const theme = createTheme({
     },
   },
   palette: {
-    bkmotel: {
+    bkbook: {
       main: "#00A699",
     },
   },

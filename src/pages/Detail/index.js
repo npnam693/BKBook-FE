@@ -1,5 +1,5 @@
 import styles from "./style.module.css";
-import { StarFill, GeoAlt, House, HouseDoor, Ticket } from "react-bootstrap-icons";
+import { StarFill, GeoAlt, House, HouseDoor, Ticket, Envelope, Telephone, PersonCheck } from "react-bootstrap-icons";
 import { useState, useEffect } from "react";
 import axiosClient from "../../api/axiosClient.js";
 import { UserState } from "../../Context/UserProvider";

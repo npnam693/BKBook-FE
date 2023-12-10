@@ -20,7 +20,7 @@ const StepTwo = ({ setStep, orderData, setIdSelect }) => {
   // const intervalRef = React.useRef(null)
   // const timeoutRef = React.useRef(null)
   // const navigate = useNavigate()
-
+  const navigate = useNavigate()
   const getPayment = async () => {
     axiosClient
       .post("/api/orders/pay-order", orderData, config)
@@ -43,6 +43,7 @@ const StepTwo = ({ setStep, orderData, setIdSelect }) => {
       .post("/api/orders/create-order", orderData, config)
       .then(() => {
         toast.success("Bạn đã đặt đơn hàng thành công.");
+        navigate('/my-buys')
       })
       .catch(() => {
         toast.error("Bạn đã đặt đơn không thành công.");
