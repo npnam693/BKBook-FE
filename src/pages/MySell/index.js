@@ -103,7 +103,7 @@ const MySell = () => {
                 <td>
                   <p>Momo</p>
                   <p>SDT: {order.book.phone}</p>
-                  <p>Tiền nhận về: <b>{Number(order.book.price).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
+                  <p>Tiền nhận về: <b>{Math.floor(Number(order.book.price)*0.95).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
                 </td>
                 <td>
                   {order.status === "preparing" ? (
