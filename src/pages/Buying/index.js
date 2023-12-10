@@ -40,7 +40,6 @@ const Buying = ({ _id, setIdSelect }) => {
   React.useEffect(() => {
     const fetchData = async () => {
       if (!data) return;
-      console.log(data)
       const feeData = await bkBookApi.countShippingFee(
         data.district.split('//')[1],
         data.ward.split('//')[1],

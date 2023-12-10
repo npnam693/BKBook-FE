@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./style.module.css";
-import Search from "../Search";
 import Menu from "../../../components/Menu";
 import { UserState } from "../../../Context/UserProvider";
 import { useState } from "react";
@@ -40,7 +39,6 @@ function Header() {
             <span className={styles.bklogo}>BK</span>
             Book
           </Link>
-          <Search />
           <div className={styles.action}>
             {!userInfo ? (
               <Link onClick={() => setModalOpen(true)} className={styles.uploadBtn}>

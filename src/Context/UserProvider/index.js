@@ -9,7 +9,6 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"))
       setUserInfo(user)
-      console.log('blo')
       if(user){
         const config = {
           headers: {

@@ -32,7 +32,6 @@ const StepOne = ({ setStep, orderData, setOrderData, setIdSelect }) => {
   const handleSubmit = () => {
     setStep((prv) => prv + 1);
   };
-  console.log(orderData)
 
   return (
     <div className="mt-5">

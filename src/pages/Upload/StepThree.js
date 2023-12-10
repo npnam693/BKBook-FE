@@ -22,7 +22,6 @@ const StepThree = () => {
   const getRate = (isAll) => {
     const base = isAll ? 75000 : 55000;
     const result = base / feePublish;
-    console.log(result, feePublish);
     if (feePublish === 0) return 0;
     else if (result < 0.001) return 0.001;
     else return result;
