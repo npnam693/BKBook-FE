@@ -8,7 +8,6 @@ const dataSteps = ["Nhập thông tin sách", "Nhập thông tin vận chuyển"
 
 function UploadPage() {
   const [step, setStep] = useState(0);
-  console.log(step)
   const getStep = () => {
     switch (step) {
       case 0: return <StepOne setStep={setStep} />;

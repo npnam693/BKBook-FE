@@ -15,7 +15,6 @@ function HomePage() {
     if (maxItem) return;
     else {
       if (window.innerHeight + window.scrollY + 30 >= document.body.scrollHeight) {
-        console.log('alo')
         if (loading === false) {
           setPaging(paging + 1);
           setLoading(true);

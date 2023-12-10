@@ -22,7 +22,6 @@ function LoginPage({ children }) {
     }
     try {
       const { data } = await axiosClient.post("/api/users/login", { email, password });
-      console.log(data);
       localStorage.setItem("userInfo", JSON.stringify({ ...data.user, token: data.token }));
       const user = JSON.parse(localStorage.getItem("userInfo"));
       setUserInfo(user);

@@ -38,7 +38,6 @@ const MyBuy = () => {
       .then((orders) => setData(orders.data.filter((order) => order.buyer === userInfo._id)))
       .catch(() => toast.error("Có lỗi xảy ra."));
   }, []);
-  console.log(data);
 
   return (
     <div className="w-layoutWith mx-auto">

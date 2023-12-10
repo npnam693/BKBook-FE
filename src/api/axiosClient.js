@@ -31,10 +31,6 @@ class BKBookApi {
     to_district,
     to_ward,
   ) => {
-    console.log(from_district,
-      from_ward,
-      to_district,
-      to_ward,)
     return axios.get('https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee', {
       params: {
         "from_district_id": Number(from_district),

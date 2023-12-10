@@ -44,7 +44,6 @@ const StepTwo = ({ setStep }) => {
     if (data.district) getWards();
   }, [data.province, data.district, data.ward]);
 
-  console.log(data);
   const handleSubmit = () => {
     if (
       data.province === "" ||
@@ -58,7 +57,6 @@ const StepTwo = ({ setStep }) => {
     ) {
       toast.warn("Vui lòng điền đầy đủ các thông tin cần thiết");
     } else {
-      console.log(data);
       localStorage.setItem(
         "newBook-step2",
         JSON.stringify({

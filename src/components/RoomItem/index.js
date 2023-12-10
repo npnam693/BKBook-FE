@@ -36,7 +36,6 @@ function RoomItem({ data, hiddenAction, setIdSelect }) {
 
   const handleClickBuy = (e) => {
     e.preventDefault();
-    console.log(userInfo)
     if (!userInfo) {
       toast.error("Bạn phải đăng nhập mới có thể mua hàng.")
       return

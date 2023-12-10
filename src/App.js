@@ -19,7 +19,6 @@ const StyledSnackbarProvider = styled(SnackbarProvider)`
 
 function App() {
   const { userInfo } = UserState();
-  console.log("alo");
 
   return (
     <StyledSnackbarProvider maxSnack={3} anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>

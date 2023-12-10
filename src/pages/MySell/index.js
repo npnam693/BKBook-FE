@@ -85,10 +85,10 @@ const MySell = () => {
                       <span
                         className={`${
                           GENRES_COLORS[order.book.genre]
-                        } p-1 text-xs font-bold rounded-lg mr-2 text-[#333] mb-2`}>
+                        } p-1 text-xs font-bold rounded-lg mr-2 text-[#333] mb-2 inline-block w-fit`}>
                         {order.book.genre}
                       </span>
-                      <span className={`p-1 text-xs text-white font-bold rounded-lg mr-1  ${getColorType(3)}`}>
+                      <span className={`p-1 text-xs text-white font-bold rounded-lg mr-1  ${getColorType(3)} inline-block w-fit`}>
                         Loại {order.book.condition + 1}
                       </span>
                     </div>
@@ -103,7 +103,8 @@ const MySell = () => {
                 <td>
                   <p>Momo</p>
                   <p>SDT: {order.book.phone}</p>
-                  <p>Tiền nhận về: <b>{Number(order.book.price).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
+                  <p>Tiền sách: <b>{Math.floor(Number(order.book.price)).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
+                  <p>Tiền nhận về: <b>{Math.floor(Number(order.book.price)*0.95).toLocaleString("vi", { style: "currency", currency: "VND" })}</b></p>
                 </td>
                 <td>
                   {order.status === "preparing" ? (
