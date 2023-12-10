@@ -30,7 +30,7 @@ const theme = createTheme({
     },
   },
   palette: {
-    bkmotel: {
+    bkbook: {
       main: "#00A699",
     },
     defaultBtn: {

@@ -181,7 +181,7 @@ function SignUpPage({ children }) {
             label="Nhập Email / Tên đăng nhập"
             size="small"
             fullWidth
-            color="bkmotel"
+            color="bkbook"
             onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
           />
 
@@ -191,7 +191,7 @@ function SignUpPage({ children }) {
               label="Nhập mật khẩu"
               type="password"
               variant="outlined"
-              color="bkmotel"
+              color="bkbook"
               className="flex-1"
               size="small"
               onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
@@ -202,7 +202,7 @@ function SignUpPage({ children }) {
               label="Xác nhận mật khẩu"
               type="password"
               variant="outlined"
-              color="bkmotel"
+              color="bkbook"
               size="small"
               className="flex-1"
               onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
@@ -215,7 +215,7 @@ function SignUpPage({ children }) {
             name="name"
             label="Họ và tên"
             variant="outlined"
-            color="bkmotel"
+            color="bkbook"
             fullWidth
             size="small"
             onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
@@ -225,7 +225,7 @@ function SignUpPage({ children }) {
             name="phoneNumber"
             label="Số điện thoại"
             variant="outlined"
-            color="bkmotel"
+            color="bkbook"
             size="small"
             fullWidth
             onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
@@ -288,7 +288,7 @@ function SignUpPage({ children }) {
             name="address"
             label="Địa chỉ nhà"
             variant="outlined"
-            color="bkmotel"
+            color="bkbook"
             size="small"
             fullWidth
             className="!mt-4 "
@@ -323,7 +323,7 @@ function SignUpPage({ children }) {
             style={{ marginLeft: "auto", marginTop: 10, width: 120 }}
             variant="contained"
             size="large"
-            color="bkmotel"
+            color="bkbook"
             onClick={() => {
               handleSubmit(values);
             }}>
@@ -404,7 +404,7 @@ const theme = createTheme({
   },
 
   palette: {
-    bkmotel: {
+    bkbook: {
       main: "#00A699",
     },
   },
